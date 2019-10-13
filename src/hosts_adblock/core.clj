@@ -41,20 +41,14 @@
       (first)))
 
 (defn apply-blocks
+  "Actually get the hosts, and put it into the hosts file"
   []
   (let [hosts (interpose \newline (get-blocks))]
     (println "Applying" (count hosts) "host records")
     (spit hosts-file (apply str (get-hosts) autofill-line \newline hosts))))
 
-(comment
-  (clojure.string/split "asdf    qwer\t   qewroiuty" #"\s+")
-  (take 10
-  (for [first (range 255) second (range 255) third (range 255)]
-    (format "127.%d.%d.%d" first second third)))
-  )
-
 (defn -main
-  "I don't do a whole lot ... yet."
+  "Go get the blocklists, put it into the /etc/hosts file"
   [& args]
   (println "Begin")
   (apply-blocks)
